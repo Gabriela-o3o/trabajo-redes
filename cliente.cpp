@@ -146,7 +146,7 @@ public:
             memset(buffer, 0, sizeof(buffer));
             return buf;
         } else {
-            cerr << "Error al recibir la informacio "<< endl;
+            cerr << "Error al recibir la informacion "<< endl;
             return "";
         }
     }
@@ -165,28 +165,28 @@ int main() {
     int columna;
     char charColumna;
     while (true) {
-        cout << "Turno del jugador Cliente (X)." << endl;
+        cout << "Turno del jugador Cliente (C)." << endl;
         cout << "Inserta la columna: ";
         cin >> charColumna;
         columna = charColumna - '0';
-        if (matrix.Agregar('X', columna)) {
+        if (matrix.Agregar('C', columna)) {
             cliente.Enviar(charColumna);
             system("cls");
             matrix.Mostrar();
-            if (matrix.VerificarGanador('X')) {
-                cout << "¡Jugador Cliente (X) gana!" << endl;
+            if (matrix.VerificarGanador('C')) {
+                cout << "¡Jugador Cliente (C) gana!" << endl;
                 break;
             }
         }
 
-        cout << "Turno del jugador Servidor (O)." << endl;
+        cout << "Turno del jugador Servidor (S)." << endl;
         charColumna = cliente.Recibir()[0];
         columna = charColumna - '0';
-        if (matrix.Agregar('O', columna)) {
+        if (matrix.Agregar('S', columna)) {
             system("cls");
             matrix.Mostrar();
-            if (matrix.VerificarGanador('O')) {
-                cout << "¡Jugador Servidor (O) gana!" << endl;
+            if (matrix.VerificarGanador('S')) {
+                cout << "¡Jugador Servidor (S) gana!" << endl;
                 break;
             }
         }
