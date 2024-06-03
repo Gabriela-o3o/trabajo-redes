@@ -15,13 +15,13 @@ public:
 
     Server() {
         if (WSAStartup(MAKEWORD(2, 0), &WSAData) != 0) {
-            cerr << "WSAStartup failed!" << endl;
+            cerr << "Fallo la inicializacion" << endl;
             exit(1);
         }
 
         server = socket(AF_INET, SOCK_STREAM, 0);
         if (server == INVALID_SOCKET) {
-            cerr << "Socket creation failed!" << endl;
+            cerr << "Fallo la creacion del Socket" << endl;
             WSACleanup();
             exit(1);
         }
@@ -31,20 +31,20 @@ public:
         serverAddr.sin_port = htons(5555);
 
         if (bind(server, (SOCKADDR *)&serverAddr, sizeof(serverAddr)) == SOCKET_ERROR) {
-            cerr << "Bind failed!" << endl;
+            cerr << "Fallo la conexion del Socket" << endl;
             closesocket(server);
             WSACleanup();
             exit(1);
         }
 
         if (listen(server, SOMAXCONN) == SOCKET_ERROR) {
-            cerr << "Listen failed!" << endl;
+            cerr << "fallo la conexion" << endl;
             closesocket(server);
             WSACleanup();
             exit(1);
         }
 
-        cout << "Listening for incoming connections." << endl;
+        cout << "Esperando las conexiones" << endl;
     }
 
     void start() {
@@ -53,9 +53,9 @@ public:
             int clientAddrSize = sizeof(clientAddr);
             SOCKET clientSocket = accept(server, (SOCKADDR *)&clientAddr, &clientAddrSize);
             if (clientSocket == INVALID_SOCKET) {
-                cerr << "Accept failed!" << endl;
+                cerr << "aceptacion fallida " << endl;
             } else {
-                cout << "Client connected!" << endl;
+                cout << "cliente conectado" << endl;
                 clientThreads.push_back(thread(&Server::handleClient, this, clientSocket));
             }
         }
@@ -110,7 +110,7 @@ public:
         cout << "Socket cerrado, servidor desconectado." << endl;
     }
 };
-
+// se crea clase para el diseño de la matriz
 class Matrix {
 public:
     char matriz[6][7];
